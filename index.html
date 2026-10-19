@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SafeSight AI workplace PPE safety dashboard">
+  <title>SafeSight AI | Safety Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="SafeSight AI home">
+        <span class="brand-icon">✓</span>
+        <span>SafeSight<span class="brand-light"> AI</span>
+        <small>WORKPLACE SAFETY</small></span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="navigation">
+        <a class="nav-item active" href="#overview">
+          <span>▦</span> Overview
+        </a>
+        <a class="nav-item" href="#inspection">
+          <span>▣</span> PPE Inspection
+        </a>
+        <a class="nav-item" href="#results">
+          <span>◉</span> Detection Results
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="system-card">
+          <span class="status-dot"></span>
+          <div>
+            <strong>System status</strong>
+            <p>Frontend is running</p>
+          </div>
+        </div>
+        <p class="sidebar-note">AI-assisted workplace safety monitoring</p>
+        <p class="sidebar-version">SAFESIGHT AI · VERSION 1.0</p>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">WORKPLACE MONITORING</p>
+          <h1>Safety Dashboard</h1>
+          <p class="subheading">Monitor personal protective equipment compliance.</p>
+        </div>
+        <div class="topbar-right">
+          <span class="demo-badge"><span></span> FRONTEND DEMO</span>
+          <div class="avatar">SS</div>
+        </div>
+      </header>
+
+      <section class="welcome-row">
+        <div>
+          <h2>Welcome to SafeSight AI</h2>
+          <p>Upload a workplace image to explore the PPE inspection interface.</p>
+        </div>
+        <span class="date-label" id="currentDate">Loading date...</span>
+      </section>
+
+      <section class="stats-grid" aria-label="Safety summary">
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-icon blue">▧</span>
+            <span class="stat-label">Images uploaded</span>
+          </div>
+          <strong class="stat-number" id="imagesCount">0</strong>
+          <p class="stat-foot">This browser session</p>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-icon green">✓</span>
+            <span class="stat-label">PPE compliant</span>
+          </div>
+          <strong class="stat-number" id="compliantCount">—</strong>
+          <p class="stat-foot">Awaiting AI model</p>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-icon orange">!</span>
+            <span class="stat-label">Safety alerts</span>
+          </div>
+          <strong class="stat-number" id="alertsCount">—</strong>
+          <p class="stat-foot">Awaiting AI model</p>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-icon purple">◉</span>
+            <span class="stat-label">AI model</span>
+          </div>
+          <strong class="stat-number model-number">Not connected</strong>
+          <p class="stat-foot">Frontend demonstration mode</p>
+        </article>
+      </section>
+
+      <div class="workspace-grid">
+        <section class="panel upload-panel" id="inspection">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">IMAGE INSPECTION</p>
+              <h2>Upload an image</h2>
+            </div>
+            <span class="step-tag">STEP 01</span>
+          </div>
+
+          <p class="panel-description">
+            Select a workplace photo to preview it before inspection.
+          </p>
+
+          <label class="upload-zone" id="uploadZone" for="imageInput">
+            <div class="upload-symbol">↑</div>
+            <strong>Choose an image to upload</strong>
+            <span>Click here or drag and drop an image</span>
+            <small>JPG, JPEG, PNG or WEBP · Maximum 10 MB</small>
+            <input
+              type="file"
+              id="imageInput"
+              accept="image/jpeg,image/png,image/webp"
+              hidden
+            >
+          </label>
+
+          <div class="preview-container" id="previewContainer" hidden>
+            <div class="preview-top">
+              <div>
+                <strong>Image preview</strong>
+                <p id="fileDetails">Selected image</p>
+              </div>
+              <button class="text-button" id="removeImage" type="button">
+                Remove
+              </button>
+            </div>
+            <img id="imagePreview" alt="Selected workplace image preview">
+          </div>
+
+          <div class="upload-actions">
+            <button class="button button-secondary" id="clearButton" type="button">
+              Clear
+            </button>
+            <button class="button button-primary" id="analyzeButton" type="button" disabled>
+              <span>◎</span> Run demo inspection
+            </button>
+          </div>
+          <p class="helper-text" id="uploadMessage" aria-live="polite">
+            Select an image to begin.
+          </p>
+        </section>
+
+        <section class="panel results-panel" id="results">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">INSPECTION OUTPUT</p>
+              <h2>Detection results</h2>
+            </div>
+            <span class="step-tag">STEP 02</span>
+          </div>
+
+          <div class="result-placeholder" id="resultPlaceholder">
+            <div class="result-illustration">⌕</div>
+            <h3>No inspection yet</h3>
+            <p>Upload an image to see the demo results here.</p>
+            <span class="waiting-pill">Waiting for image</span>
+          </div>
+
+          <div id="resultContent" hidden>
+            <div class="result-status" id="resultStatus">
+              <span class="result-status-icon">i</span>
+              <div>
+                <strong id="resultTitle">Demo inspection complete</strong>
+                <p id="resultSummary">Sample interface output only.</p>
+              </div>
+            </div>
+
+            <div class="ppe-list">
+              <div class="ppe-row">
+                <span class="ppe-icon">⛑</span>
+                <div class="ppe-details">
+                  <strong>Safety helmet</strong>
+                  <small>Detection status</small>
+                </div>
+                <span class="ppe-badge" id="helmetStatus">Demo only</span>
+              </div>
+              <div class="ppe-row">
+                <span class="ppe-icon">▤</span>
+                <div class="ppe-details">
+                  <strong>Safety vest</strong>
+                  <small>Detection status</small>
+                </div>
+                <span class="ppe-badge" id="vestStatus">Demo only</span>
+              </div>
+              <div class="ppe-row">
+                <span class="ppe-icon">◫</span>
+                <div class="ppe-details">
+                  <strong>Safety goggles</strong>
+                  <small>Detection status</small>
+                </div>
+                <span class="ppe-badge" id="gogglesStatus">Demo only</span>
+              </div>
+            </div>
+
+            <div class="demo-notice">
+              <strong>Demo results — not AI predictions</strong>
+              <p>
+                These sample statuses are illustrative. Connect and test a
+                trained PPE detection model before using this system for
+                real safety decisions.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel activity-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">SESSION HISTORY</p>
+            <h2>Recent activity</h2>
+          </div>
+          <button class="text-button" id="clearHistory" type="button">
+            Clear history
+          </button>
+        </div>
+        <div class="activity-empty" id="activityEmpty">
+          No activity yet. Your image uploads will appear here.
+        </div>
+        <div class="activity-list" id="activityList"></div>
+      </section>
+
+      <footer class="footer">
+        <span>© 2026 SafeSight AI</span>
+        <span>Frontend prototype · For demonstration purposes</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
